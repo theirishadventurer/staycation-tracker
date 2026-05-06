@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Gamepad2, Play, Trophy } from 'lucide-react';
+import { Gamepad2, Play, Trophy, Settings } from 'lucide-react';
 
 import { ITINERARY, DAYS } from './data/itinerary.js';
 import { useAuth } from './lib/useAuth.js';
@@ -8,6 +8,7 @@ import { createStorage, isCloudEnabled } from './lib/storage.js';
 import ScheduleView from './components/ScheduleView.jsx';
 import GameDetail from './components/GameDetail.jsx';
 import StatsView from './components/StatsView.jsx';
+import SettingsView from './components/SettingsView.jsx';
 
 export default function App() {
   const { user, loading: authLoading } = useAuth();
@@ -48,6 +49,13 @@ export default function App() {
   const setNotes = (id, notes) => updateGame(id, { notes });
   const setRating = (id, rating) => updateGame(id, { rating });
   const setTime = (id, sec) => updateGame(id, { time_played_sec: sec });
+
+  const clearAllProgress = async () => {
+    if (!storage) return;
+    await storage.clearAll();
+    setProgress({});
+    setSelectedId(null);
+  };
 
   const openGame = (id) => {
     setSelectedId(id);
@@ -105,6 +113,7 @@ export default function App() {
             { id: 'schedule', label: 'Schedule', icon: Gamepad2 },
             { id: 'game',     label: 'Now Playing', icon: Play, disabled: !selectedId },
             { id: 'stats',    label: 'Stats', icon: Trophy },
+            { id: 'settings', label: 'Settings', icon: Settings },
           ].map((t) => {
             const Icon = t.icon;
             const active = activeTab === t.id;
@@ -158,6 +167,10 @@ export default function App() {
             totalMinutes={totalMinutes}
             onJumpTo={openGame}
           />
+        )}
+
+        {activeTab === 'settings' && (
+          <SettingsView onClearAll={clearAllProgress} />
         )}
       </div>
     </div>

@@ -13,6 +13,7 @@
  * Export a single `createStorage(userId)` factory that returns:
  *   - load()                   -> Promise<progress map>
  *   - upsert(gameId, patch)    -> Promise<void>
+ *   - clearAll()               -> Promise<{}>   wipes all progress for this user
  */
 
 import { supabase, isCloudEnabled } from './supabase.js';
@@ -36,6 +37,10 @@ const localBackend = {
     };
     localStorage.setItem(LS_KEY, JSON.stringify(next));
     return next;
+  },
+  async clearAll() {
+    localStorage.removeItem(LS_KEY);
+    return {};
   },
 };
 
@@ -87,6 +92,16 @@ const cloudBackend = (userId) => ({
     }
 
     return { ...current, [gameId]: merged };
+  },
+
+  async clearAll() {
+    const { error } = await supabase
+      .from('progress')
+      .delete()
+      .eq('user_id', userId);
+
+    if (error) console.error('[storage] clearAll failed', error);
+    return {};
   },
 });
 
