@@ -67,7 +67,7 @@ export default function App() {
   if (authLoading || !hydrated) {
     return (
       <div className="crt-root flex items-center justify-center min-h-screen">
-        <div className="pixel-font text-purple-400 text-2xl glow-text blink">
+        <div className="pixel-font text-green-400 text-2xl glow-text blink">
           LOADING…
         </div>
       </div>
@@ -81,26 +81,26 @@ export default function App() {
         {/* HEADER */}
         <header className="mb-6">
           <div className="flex items-baseline justify-between mb-1">
-            <h1 className="pixel-font text-4xl text-purple-400 glow-text">
+            <h1 className="pixel-font text-4xl text-green-400 glow-text">
               STAYCATION<span className="text-red-500">.</span>EXE
             </h1>
-            <span className="text-xs text-purple-300/70 hidden sm:inline">
+            <span className="text-xs text-green-300/70 hidden sm:inline">
               v1.0 {isCloudEnabled ? '☁' : '◌'}
             </span>
           </div>
-          <p className="text-xs text-purple-300/60 tracking-widest uppercase">
+          <p className="text-xs text-green-300/60 tracking-widest uppercase">
             ▸ retro_gaming_tracker — {completedCount}/{totalGames} cleared
           </p>
-          <div className="mt-3 h-1 bg-purple-900/40 rounded overflow-hidden">
+          <div className="mt-3 h-1 bg-green-900/40 rounded overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-green-500 to-cyan-400 transition-all duration-500"
               style={{ width: `${(completedCount / totalGames) * 100}%` }}
             />
           </div>
         </header>
 
         {/* TABS */}
-        <nav className="flex gap-2 mb-6 border-b border-purple-900/40 pb-3">
+        <nav className="flex gap-2 mb-6 border-b border-green-900/40 pb-3">
           {[
             { id: 'schedule', label: 'Schedule', icon: Gamepad2 },
             { id: 'game',     label: 'Now Playing', icon: Play, disabled: !selectedId },
@@ -114,7 +114,7 @@ export default function App() {
                 onClick={() => !t.disabled && setActiveTab(t.id)}
                 disabled={t.disabled}
                 className={`neon-btn flex items-center gap-2 px-3 py-2 text-xs rounded
-                  ${active ? 'bg-purple-600 text-white' : 'text-purple-300/70 hover:text-purple-200 bg-transparent'}
+                  ${active ? 'bg-green-600 text-white' : 'text-green-300/70 hover:text-green-200 bg-transparent'}
                   ${t.disabled ? 'opacity-30' : ''}`}
               >
                 <Icon size={14} />

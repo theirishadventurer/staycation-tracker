@@ -55,7 +55,7 @@ export default function GameDetail({
     <div>
       <button
         onClick={onBack}
-        className="neon-btn flex items-center gap-1 text-xs text-purple-300 hover:text-purple-100 mb-4 bg-transparent"
+        className="neon-btn flex items-center gap-1 text-xs text-green-300 hover:text-green-100 mb-4 bg-transparent"
       >
         <ChevronLeft size={14} /> Back to schedule
       </button>
@@ -69,39 +69,39 @@ export default function GameDetail({
           >
             {game.console}
           </span>
-          <span className="text-xs text-purple-300/60">{game.time}</span>
-          <span className="text-xs text-purple-400/60">• {game.minutes}min</span>
+          <span className="text-xs text-green-300/60">{game.time}</span>
+          <span className="text-xs text-green-400/60">• {game.minutes}min</span>
         </div>
-        <h2 className="pixel-font text-3xl text-purple-50 mb-2 leading-tight">{game.title}</h2>
-        <p className="text-sm text-purple-200/70 italic">{game.vibe}</p>
+        <h2 className="pixel-font text-3xl text-green-50 mb-2 leading-tight">{game.title}</h2>
+        <p className="text-sm text-green-200/70 italic">{game.vibe}</p>
       </div>
 
       {/* TIMER */}
       <div className="scan-card rounded-lg p-5 mb-5">
-        <div className="text-xs text-pink-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+        <div className="text-xs text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
           <Clock size={12} /> Session Timer
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-5">
           <div className="relative">
             <svg width="160" height="160">
               <circle cx="80" cy="80" r={radius}
-                stroke="rgba(124, 58, 237, 0.15)" strokeWidth="6" fill="none" />
+                stroke="rgba(34, 197, 94, 0.15)" strokeWidth="6" fill="none" />
               <circle
                 className="timer-ring"
                 cx="80" cy="80" r={radius}
-                stroke={timerOver ? '#22c55e' : '#a855f7'}
+                stroke={timerOver ? '#fbbf24' : '#4ade80'}
                 strokeWidth="6" fill="none"
                 strokeDasharray={circ}
                 strokeDashoffset={offset}
                 strokeLinecap="round"
-                style={{ filter: `drop-shadow(0 0 6px ${timerOver ? '#22c55e' : '#a855f7'})` }}
+                style={{ filter: `drop-shadow(0 0 6px ${timerOver ? '#fbbf24' : '#4ade80'})` }}
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className={`pixel-font text-3xl ${timerOver ? 'text-green-400 glow-text blink' : 'text-purple-100'}`}>
+              <div className={`pixel-font text-3xl ${timerOver ? 'text-amber-400 glow-text blink' : 'text-green-100'}`}>
                 {formatTime(seconds)}
               </div>
-              <div className="text-[10px] text-purple-400/70 uppercase tracking-wider">
+              <div className="text-[10px] text-green-400/70 uppercase tracking-wider">
                 {timerOver ? 'time up' : `target ${formatTime(targetSec)}`}
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function GameDetail({
             <button
               onClick={() => { setSeconds(0); setRunning(false); onUpdateTime(0); }}
               className="neon-btn flex items-center justify-center gap-2 px-5 py-3 rounded
-                bg-transparent border border-purple-700 text-purple-300 hover:border-purple-400"
+                bg-transparent border border-green-700 text-green-300 hover:border-green-400"
             >
               <RotateCcw size={14} /> Reset
             </button>
@@ -131,7 +131,7 @@ export default function GameDetail({
         <div className="text-xs text-yellow-400 uppercase tracking-widest mb-2 flex items-center gap-2">
           <Lightbulb size={12} /> Did You Know
         </div>
-        <p className="text-sm text-purple-100/90 leading-relaxed">{game.fact}</p>
+        <p className="text-sm text-green-100/90 leading-relaxed">{game.fact}</p>
       </div>
 
       {/* PRO TIP */}
@@ -139,13 +139,13 @@ export default function GameDetail({
         <div className="text-xs text-green-400 uppercase tracking-widest mb-2 flex items-center gap-2">
           <Gamepad2 size={12} /> Pro Tip
         </div>
-        <p className="text-sm text-purple-100/90 leading-relaxed">{game.tip}</p>
+        <p className="text-sm text-green-100/90 leading-relaxed">{game.tip}</p>
       </div>
 
       {/* NOTES + RATING */}
       <div className="scan-card rounded-lg p-5 mb-5">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs text-pink-400 uppercase tracking-widest flex items-center gap-2">
+          <div className="text-xs text-cyan-400 uppercase tracking-widest flex items-center gap-2">
             <BookOpen size={12} /> Field Notes
           </div>
           {savedFlash && (
@@ -162,14 +162,14 @@ export default function GameDetail({
         />
 
         <div className="mt-4 flex items-center gap-2 flex-wrap">
-          <span className="text-xs text-purple-300/70 uppercase tracking-wider mr-1">Rating:</span>
+          <span className="text-xs text-green-300/70 uppercase tracking-wider mr-1">Rating:</span>
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               key={n}
               onClick={() => onSetRating(n === entry.rating ? 0 : n)}
               className="neon-btn text-2xl bg-transparent"
               style={{
-                color: n <= (entry.rating || 0) ? '#fbbf24' : '#3b3354',
+                color: n <= (entry.rating || 0) ? '#fbbf24' : '#1f2937',
                 filter: n <= (entry.rating || 0) ? 'drop-shadow(0 0 4px #fbbf24)' : 'none',
                 padding: 0,
               }}
@@ -185,7 +185,7 @@ export default function GameDetail({
         className={`neon-btn w-full py-4 rounded text-base font-bold flex items-center justify-center gap-2
           ${entry.completed
             ? 'bg-green-500/20 border border-green-500 text-green-300'
-            : 'bg-purple-600 hover:bg-purple-500 text-white'}`}
+            : 'bg-green-600 hover:bg-green-500 text-white'}`}
       >
         {entry.completed ? <><Check size={18} /> Completed — tap to undo</> : <>Mark Completed</>}
       </button>
